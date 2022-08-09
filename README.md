@@ -3,6 +3,7 @@ A community driven web app based on django
 
 # Requirements:
   Python 3.6 or above
+  
   Install Django using : pip install django
   
   # Steps to run:
