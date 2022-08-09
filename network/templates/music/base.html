@@ -1,0 +1,77 @@
+{% load static %}
+<html>
+  <head>
+    <title>MusicNation</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'music/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'music/css/music.css' %}">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+  </head>
+  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="{% url 'allposts'%}">Music Community App</a>
+
+      <div>
+        <ul class="navbar-nav mr-auto">
+          {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'profile' request.user.username%}"
+              ><strong>{{ request.user.username }}</strong></a
+            >
+          </li>
+	  <li class="nav-item">
+            <a class="nav-link" href="{% url 'allposts' %}">All Posts</a>
+          </li>
+          {% endif %}
+          
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'following' %}">Following</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+          </li>
+	  <li class="nav-item">
+            <a class="nav-link" href="{% url 'home' %}">Music</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Log In</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="float:right; font-weight:bold;">
+    <div>
+         <ul class="navbar-nav mr-auto">
+          {% if request.user.is_authenticated %}
+          <li class="nav2">
+              <a class="nav-link" href="{% url 'profile_detail' user %}">{{ user.username }}</a>
+            </li>
+          <li class="nav2">
+              <a class="nav-link" href="{% url 'add_album' user %}">Add Album</a>
+            </li>
+          
+          {% else %}
+	  {% endif %}
+        </ul>
+    </div>
+    </nav>
+    <div class="container mt-4">
+      {%block content%}
+      {%endblock%}
+    </div>
+
+  </body>
+</html>

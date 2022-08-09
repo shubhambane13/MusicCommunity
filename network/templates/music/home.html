@@ -1,0 +1,27 @@
+{% extends 'music/base.html' %}
+
+{%block title%}
+{%endblock%}
+{%block content%}
+<pre>
+</pre><hr/>
+<div class="card">
+  <br>
+  <ul class="home-list">
+    <div>
+    {% for album in albums %}
+      <li >
+        <span><a class="home-a" href="{% url 'album_detail' username=album.album_artist album=album.album_name %}">
+          <img src="{{ album.album_logo.url }}" style="width:100px">
+        </a></span>
+         <span style="color:#007bff;">{{album.album_name}} by</span>
+        <a class="home-a" href="{% url 'profile_detail' username=album.album_artist %}">
+          {{album.album_artist}}
+        </a>
+      </li><hr/>
+    {% endfor %}
+    </div>
+  </ul>
+ 
+</div>
+{%endblock%}
